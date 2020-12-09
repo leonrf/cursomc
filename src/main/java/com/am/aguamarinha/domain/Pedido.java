@@ -2,6 +2,8 @@ package com.am.aguamarinha.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -33,6 +36,9 @@ public class Pedido implements Serializable {
 	@JoinColumn(name="endereco_de_entrega_id") // Associando ao endereço de entrega
 	private Endereco enderecoDeEntrega;
 	
+	@OneToMany(mappedBy="id.pedido")
+	private Set<ItemPedido> itens = new HashSet<>(); // Conjunto para informar os itens pedidos
+	
 	public Pedido() {
 		// TODO Auto-generated constructor stub
 	}
@@ -43,7 +49,7 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -107,6 +113,14 @@ public class Pedido implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
 	}
 	
 	
