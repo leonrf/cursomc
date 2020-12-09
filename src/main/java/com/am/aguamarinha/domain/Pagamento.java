@@ -6,14 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.Inheritance;
-import javax.persistence.Inheritance;
-import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.am.aguamarinha.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -24,6 +22,7 @@ public class Pagamento implements Serializable {
 	private Integer id;
 	private Integer estado; // Adaptação
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId // Desta forma, fica garantido que o id do pagamento será o msm Id do pedido

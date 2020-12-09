@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.am.aguamarinha.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -35,6 +36,7 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy="cliente") // Mapendo com o campo cliente
 	private List<Endereco> enderecos = new ArrayList<>(); // Relação um para muitos
 	
+	@JsonBackReference
 	@ElementCollection
 	@CollectionTable(name="TELEFONE") 
 	private Set<String> telefones = new HashSet<>();
